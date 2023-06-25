@@ -9,11 +9,7 @@ name: OpenWrt-CI
 
 on:
   workflow_dispatch:
-    inputs:
-      ssh:
-        description: 'SSH connection to Actions'
-        required: false
-        default: 'false'
+
   #schedule:
   #  - cron: 0 20 * * *
 
@@ -47,6 +43,11 @@ jobs:
 
       - name: Checkout OpenWrt
         uses: actions/checkout@v3
+
+      - name: Add Custom Feeds
+        run: |
+          chmod +x ./custom_feeds.sh
+          ./custom_feeds.sh
 
       - name: Update feeds
         run: |
